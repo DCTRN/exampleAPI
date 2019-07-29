@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TopicService {
+	
+	@Autowired
+	private Topicrepository topicrepository;
 	
 	private List<Topic> topics = new ArrayList<Topic>(Arrays.asList(new Topic("spring", "spring framework", "spring framework description"),
 			new Topic("java", "java framework", "java framework description"),
@@ -15,27 +19,28 @@ public class TopicService {
 	
 	
 	public List<Topic> getAllTopis() {
+		List<Topic> topics = new ArrayList<Topic>();
+		topicrepository.findAll().forEach(topics::add);
 		return topics;
 	}
 	
 	public Topic getTopic(String id) {
-		return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+		if (topicrepository.findById(id) == null)
+			return new Topic();
+		else 
+			return topicrepository.findById(id).get();
 	}
 
 	public void addTopic(Topic topic) {
-		topics.add(topic);
+		topicrepository.save(topic);
 	}
 
-	public void updateTopic(String id, Topic topic) {
-		for (int i = 0; i < topics.size(); i++) {
-			if (topics.get(i).getId().equals(id)) {
-				topics.set(i, topic);
-			}
-		}
+	public void updateTopic(Topic topic) {
+		topicrepository.save(topic);
 	}
 
 	public void deleteTopic(String id) {
-		topics.removeIf(t -> t.getId().equals(id));
+		topicrepository.deleteById(id);
 	}
 	
 }
