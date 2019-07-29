@@ -3,17 +3,32 @@ package com.exampleAPI.topic;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TopicController {
 
+	@Autowired
+	private TopicService topicService;
+	
 	@RequestMapping("/topics")
 	public List<Topic> getAllTopics() {
-		return Arrays.asList(new Topic("spring", "spring framework", "spring framework description"),
-				new Topic("java", "java framework", "java framework description"),
-				new Topic("python", "python framework", "python framework description"));
+		return topicService.getAllTopis();
+	}
+	
+	@RequestMapping("/topics/{id}")
+	public Topic getTopic(@PathVariable String id) {
+		return topicService.getTopic(id);
+	}
+	
+	@RequestMapping( value = "/topics", method=RequestMethod.POST)
+	public void addTopic(@RequestBody Topic topic) {
+		topicService.addTopic(topic);
 	}
 	
 }
