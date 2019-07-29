@@ -1,6 +1,5 @@
 package com.exampleAPI.topic;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,16 @@ public class TopicController {
 	@RequestMapping( value = "/topics", method=RequestMethod.POST)
 	public void addTopic(@RequestBody Topic topic) {
 		topicService.addTopic(topic);
+	}
+	
+	@RequestMapping( value = "/topics/{id}", method=RequestMethod.PUT)
+	public void addTopic(@PathVariable String id, @RequestBody Topic topic) {
+		topicService.updateTopic(id, topic);
+	}
+	
+	@RequestMapping( value = "/topics/{id}", method=RequestMethod.DELETE)
+	public void addTopic(@PathVariable String id) {
+		topicService.deleteTopic(id);
 	}
 	
 }
