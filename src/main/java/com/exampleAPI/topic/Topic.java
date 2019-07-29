@@ -5,21 +5,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="topics")
 public class Topic {
 
 	@Id
 	public String id;
-	public String name;
-	public String description;
+	public String topicName;
+	public String topicDescription;
 	
 	
 	public Topic() {}
 	
 	public Topic(String id, String name, String description) {
 		this.id = id;
-		this.name = name;
-		this.description = description;
+		this.topicName = name;
+		this.topicDescription = description;
 	}
 
 	public String getId() {
@@ -30,22 +29,20 @@ public class Topic {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTopicName() {
+		return topicName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getTopicDescription() {
+		return topicDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTopicDescription(String topicDescription) {
+		this.topicDescription = topicDescription;
 	}
-	
-	
-	
+
 }

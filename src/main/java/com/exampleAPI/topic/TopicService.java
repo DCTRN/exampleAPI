@@ -11,12 +11,7 @@ import org.springframework.stereotype.Service;
 public class TopicService {
 	
 	@Autowired
-	private Topicrepository topicrepository;
-	
-	private List<Topic> topics = new ArrayList<Topic>(Arrays.asList(new Topic("spring", "spring framework", "spring framework description"),
-			new Topic("java", "java framework", "java framework description"),
-			new Topic("python", "python framework", "python framework description")));
-	
+	private TopicRepository topicrepository;
 	
 	public List<Topic> getAllTopis() {
 		List<Topic> topics = new ArrayList<Topic>();
